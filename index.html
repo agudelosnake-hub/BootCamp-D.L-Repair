@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BootCamp D.L Repair - Registro</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #0d0d0d;
+    background-image: 
+      linear-gradient(rgba(212, 175, 55, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(212, 175, 55, 0.03) 1px, transparent 1px);
+    background-size: 30px 30px;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+  .form-container {
+    background: linear-gradient(145deg, #1a1a2e, #16213e);
+    border: 2px solid #d4af37;
+    border-radius: 16px;
+    padding: 40px 30px;
+    max-width: 450px;
+    width: 100%;
+    box-shadow: 0 0 40px rgba(212, 175, 55, 0.3);
+    position: relative;
+    overflow: hidden;
+  }
+  .form-container::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+    animation: pulse 4s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.1); opacity: 0.8; }
+  }
+  .form-header {
+    text-align: center;
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 1;
+  }
+  .form-header h1 {
+    color: #d4af37;
+    font-size: 26px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+  }
+  .form-header p {
+    color: #ccc;
+    font-size: 14px;
+    margin-top: 8px;
+  }
+  .form-group {
+    margin-bottom: 25px;
+    position: relative;
+    z-index: 1;
+  }
+  .form-group label {
+    color: #d4af37;
+    font-size: 14px;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .input-wrapper {
+    position: relative;
+  }
+  .form-group input {
+    width: 100%;
+    padding: 16px 20px 16px 50px;
+    background: rgba(13, 13, 13, 0.8);
+    border: 2px solid #d4af37;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 15px;
+    outline: none;
+    transition: all 0.3s ease;
+  }
+  .form-group input:focus {
+    border-color: #f0d060;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+    transform: translateY(-2px);
+  }
+  .form-group input::placeholder {
+    color: #666;
+  }
+  .input-icon {
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #d4af37;
+    font-size: 18px;
+  }
+  .btn-submit {
+    width: 100%;
+    padding: 18px;
+    background: linear-gradient(135deg, #d4af37, #f0d060);
+    color: #0d0d0d;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4);
+  }
+  .btn-submit:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.6);
+  }
+  .btn-submit:active {
+    transform: translateY(-1px);
+  }
+  .success-message {
+    display: none;
+    background: rgba(212, 175, 55, 0.2);
+    border: 2px solid #d4af37;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    color: #d4af37;
+    font-weight: 600;
+    margin-top: 20px;
+    position: relative;
+    z-index: 1;
+  }
+  .loading {
+    display: none;
+    text-align: center;
+    color: #d4af37;
+    margin-top: 10px;
+    position: relative;
+    z-index: 1;
+  }
+  .spinner {
+    border: 3px solid rgba(212, 175, 55, 0.3);
+    border-top: 3px solid #d4af37;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 10px;
+  }
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  .footer {
+    text-align: center;
+    margin-top: 25px;
+    color: #666;
+    font-size: 12px;
+    position: relative;
+    z-index: 1;
+  }
+</style>
+</head>
+<body>
+  <div class="form-container">
+    <div class="form-header">
+      <h1>⚡ BootCamp D.L Repair</h1>
+      <p>Diagnóstico y Reparación de iPhone</p>
+    </div>
+    
+    <form id="bootcampForm">
+      <div class="form-group">
+        <label>📝 Ingresa Tu Nombre</label>
+        <div class="input-wrapper">
+          <span class="input-icon"></span>
+          <input type="text" name="nombre" placeholder="Tu nombre completo" required>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label>📱 Ingresa Tu Número Celular</label>
+        <div class="input-wrapper">
+          <span class="input-icon">📞</span>
+          <input type="tel" name="celular" placeholder="Ej: 3001234567" required>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label>📧 Ingresa Tu Correo</label>
+        <div class="input-wrapper">
+          <span class="input-icon">✉️</span>
+          <input type="email" name="correo" placeholder="tu@email.com" required>
+        </div>
+      </div>
+      
+      <button type="submit" class="btn-submit"> Enviar Datos</button>
+      
+      <div class="loading" id="loading">
+        <div class="spinner"></div>
+        <p>Enviando información...</p>
+      </div>
+      
+      <div class="success-message" id="successMessage">
+        ✅ ¡Registro exitoso!<br>
+        <small>Te contactaremos pronto con la información del BootCamp</small>
+      </div>
+    </form>
+    
+    <div class="footer">
+      <p>Precisión Lab Academy | D.L Repair</p>
+    </div>
+  </div>
+
+  <script>
+    // ️ REEMPLAZA ESTA URL CON LA DE TU APPS SCRIPT
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxiMgUwBVJzedQGlfmGA2bVCmJW1iwAA6G2hB21i_LReqDY682cjsFTlZAf63HxeKIJjA/exec';
+    
+    document.getElementById('bootcampForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const loading = document.getElementById('loading');
+      const successMsg = document.getElementById('successMessage');
+      const submitBtn = document.querySelector('.btn-submit');
+      const formData = new FormData(this);
+      
+      // Mostrar loading
+      loading.style.display = 'block';
+      submitBtn.style.display = 'none';
+      
+      // Enviar datos
+      fetch(SCRIPT_URL, {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+        // Ocultar loading
+        loading.style.display = 'none';
+        
+        // Mostrar mensaje de éxito
+        successMsg.style.display = 'block';
+        
+        // Limpiar formulario
+        this.reset();
+        
+        // Ocultar mensaje después de 5 segundos
+        setTimeout(() => {
+          successMsg.style.display = 'none';
+          submitBtn.style.display = 'block';
+        }, 5000);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        loading.style.display = 'none';
+        submitBtn.style.display = 'block';
+        alert('❌ Hubo un error al enviar. Por favor intenta de nuevo.');
+      });
+    });
+  </script>
+</body>
+</html>
